@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Number Generator (0 to 10)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 24px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Random Number Generator</h1>
+  <p>0 se 10 tak koi bhi number generate karne ke liye button dabayein:</p>
+
+  <button onclick="generateRandomNumber()">Generate Number</button>
+
+  <div id="result"></div>
+
+  <script>
+    function generateRandomNumber() {
+      // 0 se 10 tak random number generate karna
+      const randomNumber = Math.floor(Math.random() * 11);
+      document.getElementById("result").innerText = "Random Number: " + randomNumber;
+    }
+  </script>
+
+</body>
+</html>
