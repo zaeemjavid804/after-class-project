@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map and Arrange Array Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      background: #f8f9fa;
+    }
+    h2 {
+      color: #333;
+    }
+    input, button {
+      font-size: 16px;
+      padding: 8px;
+      margin: 6px;
+    }
+    button {
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #output {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #222;
+    }
+    .buttons {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Map and Arrange (Sort) Array Project</h2>
+  <p>Enter numbers separated by commas:</p>
+  <input id="numbers" placeholder="e.g. 5,2,8,1,9" size="40">
+  
+  <div class="buttons">
+    <button onclick="showOriginal()">Show Original</button>
+    <button onclick="doubleNumbers()">Double (map)</button>
+    <button onclick="squareNumbers()">Square (map)</button>
+    <button onclick="sortAscending()">Sort Ascending</button>
+    <button onclick="sortDescending()">Sort Descending</button>
+    <button onclick="resetArray()">Reset</button>
+  </div>
+
+  <p id="output"></p>
+
+  <script>
+    let original = [];
+    let current = [];
+
+    // Get array from input
+    function getArray() {
+      const raw = document.getElementById('numbers').value.trim();
+      if (!raw) {
+        alert("Please enter some numbers!");
+        return [];
+      }
+      return raw.split(',').map(x => Number(x.trim()));
+    }
+
+    // Display the current array
+    function displayArray(title, arr) {
+      document.getElementById('output').innerHTML = `${title}: [ ${arr.join(', ')} ]`;
+    }
+
+    function showOriginal() {
+      original = getArray();
+      current = [...original];
+      displayArray("Original Array", current);
+    }
+
+    function doubleNumbers() {
+      if (!current.length) current = getArray();
+      current = current.map(x => x * 2);
+      displayArray("After map (Double)", current);
+    }
+
+    function squareNumbers() {
+      if (!current.length) current = getArray();
+      current = current.map(x => x * x);
+      displayArray("After map (Square)", current);
+    }
+
+    function sortAscending() {
+      if (!current.length) current = getArray();
+      current = [...current].sort((a, b) => a - b);
+      displayArray("Sorted Ascending", current);
+    }
+
+    function sortDescending() {
+      if (!current.length) current = getArray();
+      current = [...current].sort((a, b) => b - a);
+      displayArray("Sorted Descending", current);
+    }
+
+    function resetArray() {
+      current = [...original];
+      displayArray("Reset to Original", current);
+    }
+  </script>
+
+</body>
+</html>
