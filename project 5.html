@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Handling Project</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+      color: green;
+    }
+    #error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>JavaScript Error Handling Demo</h2>
+
+  <p>Enter a number to find its square:</p>
+  <input type="text" id="userInput" placeholder="Enter a number" />
+  <button onclick="calculateSquare()">Calculate</button>
+
+  <div id="result"></div>
+  <div id="error"></div>
+
+  <script>
+    function calculateSquare() {
+      const input = document.getElementById('userInput').value;
+      const resultDiv = document.getElementById('result');
+      const errorDiv = document.getElementById('error');
+
+      // Clear previous results
+      resultDiv.textContent = '';
+      errorDiv.textContent = '';
+
+      try {
+        // Check if input is empty
+        if (input.trim() === '') {
+          throw new Error('Input cannot be empty!');
+        }
+
+        // Check if input is a number
+        const num = Number(input);
+        if (isNaN(num)) {
+          throw new Error('Please enter a valid number!');
+        }
+
+        // If everything is fine, show the result
+        const square = num * num;
+        resultDiv.textContent = `The square of ${num} is ${square}`;
+      } 
+      catch (error) {
+        // Handle the error
+        errorDiv.textContent = `⚠️ Error: ${error.message}`;
+        console.error(error); // Log error in console (for developers)
+      } 
+      finally {
+        console.log("Calculation attempted.");
+      }
+    }
+  </script>
+</body>
+</html>
