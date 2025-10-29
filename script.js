@@ -29,3 +29,66 @@ function sendMessage() {
     // Clear message input
     messageInput.value = "";
 }
+// Asynchronous function to fetch user data
+async function fetchUserData() {
+    const userList = document.getElementById("userList");
+    userList.innerHTML = "Loading data...";
+  
+    try {
+      // Fake API call
+      const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  
+      // Check if request was successful
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const users = await response.json();
+  
+      // Display users on the page
+      userList.innerHTML = "";
+      users.forEach(user => {
+        const div = document.createElement("div");
+        div.innerHTML = `<strong>${user.name}</strong> - ${user.email}`;
+        userList.appendChild(div);
+      });
+  
+    } catch (error) {
+      userList.innerHTML = `<span style="color:red;">Error: ${error.message}</span>`;
+    }
+  }
+  
+  // Button click event
+  document.getElementById("loadDataBtn").addEventListener("click", fetchUserData);
+// Asynchronous function to fetch user data
+async function fetchUserData() {
+    const userList = document.getElementById("userList");
+    userList.innerHTML = "Loading data...";
+  
+    try {
+      // Fake API call
+      const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  
+      // Check if request was successful
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const users = await response.json();
+  
+      // Display users on the page
+      userList.innerHTML = "";
+      users.forEach(user => {
+        const div = document.createElement("div");
+        div.innerHTML = `<strong>${user.name}</strong> - ${user.email}`;
+        userList.appendChild(div);
+      });
+  
+    } catch (error) {
+      userList.innerHTML = `<span style="color:red;">Error: ${error.message}</span>`;
+    }
+  }
+  
+  // Button click event
+  document.getElementById("loadDataBtn").addEventListener("click", fetchUserData);
+    
