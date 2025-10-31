@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input Validation Project</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 3px;
+    }
+
+    button {
+      width: 100%;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Input Validation Form</h2>
+
+    <form id="validationForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" />
+      <div class="error" id="nameError"></div>
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" placeholder="Enter your email" />
+      <div class="error" id="emailError"></div>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" placeholder="Enter your age" />
+      <div class="error" id="ageError"></div>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter your password" />
+      <div class="error" id="passwordError"></div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="success" id="successMessage"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("validationForm");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Get input values
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const age = document.getElementById("age").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // Error elements
+      const nameError = document.getElementById("nameError");
+      const emailError = document.getElementById("emailError");
+      const ageError = document.getElementById("ageError");
+      const passwordError = document.getElementById("passwordError");
+      const successMessage = document.getElementById("successMessage");
+
+      // Reset error messages
+      nameError.textContent = "";
+      emailError.textContent = "";
+      ageError.textContent = "";
+      passwordError.textContent = "";
+      successMessage.textContent = "";
+
+      let isValid = true;
+
+      // Validate name
+      if (name === "" || !/^[A-Za-z\s]+$/.test(name)) {
+        nameError.textContent = "❌ Please enter a valid name (letters only).";
+        isValid = false;
+      }
+
+      // Validate email
+      if (email === "" || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        emailError.textContent = "❌ Please enter a valid email address.";
+        isValid = false;
+      }
+
+      // Validate age
+      if (age === "" || age < 1 || age > 120) {
+        ageError.textContent = "❌ Age must be between 1 and 120.";
+        isValid = false;
+      }
+
+      // Validate password
+      if (password.length < 6) {
+        passwordError.textContent = "❌ Password must be at least 6 characters long.";
+        isValid = false;
+      }
+
+      // If all valid
+      if (isValid) {
+        successMessage.textContent = "✅ Form submitted successfully!";
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
